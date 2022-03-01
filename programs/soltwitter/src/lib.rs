@@ -4,14 +4,20 @@ declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
 
 #[program]
 pub mod soltwitter {
-    use anchor_lang::solana_program::entrypoint::ProgramResult;
-
     use super::*;
-    pub fn send_tweet(ctx: Context<SendTweet>, topic: String, content: String) -> ProgramResult {
+
+    pub fn send_tweet(ctx: Context<SendTweet>, topic: String, content: String) -> Result<()> {
         let tweet: &mut Account<Tweet> = &mut ctx.accounts.tweet;
         let author: &Signer = &ctx.accounts.author;
         // This provides network time of Solana.
         let clock = Clock::get()?;
+
+        if topic.chars().count() > 50 {
+            return Err(TweetError::TopicTooLong.into());
+        }
+        if content.chars().count() > 280 {
+            return Err(TweetError::ContentTooLong.into());
+        }
 
         tweet.author = *author.key;
         tweet.timestamp = clock.unix_timestamp;
@@ -20,6 +26,14 @@ pub mod soltwitter {
 
         Ok(())
     }
+}
+
+#[error_code]
+pub enum TweetError {
+    #[msg("Topic per tweet should be less or equal than 50 chars.")]
+    TopicTooLong,
+    #[msg("Content per tweet should be less or equal than 280 chars.")]
+    ContentTooLong,
 }
 
 #[derive(Accounts)]
