@@ -13,6 +13,9 @@ describe("soltwitter", () => {
 
   const program = anchor.workspace.Soltwitter as Program<Soltwitter>;
 
+  const TOPIC_ERROR = "Topic per tweet should be less or equal than 50 chars.";
+  const CONTENT_ERROR = "Content per tweet should be less or equal than 280 chars.";
+
   it("will send a new tweet", async () => {
     const newTopic = "TOPIC HERE";
     const newContent = "CONTENT HERE";
@@ -42,6 +45,25 @@ describe("soltwitter", () => {
     assert.ok(tweetAccount.timestamp);
   });
 
+  it("will send a new tweet without a topic", async () => {
+    const tweet = Keypair.generate();
+    await program.rpc.sendTweet("", "hi", {
+      accounts: {
+        tweet: tweet.publicKey,
+        author: program.provider.wallet.publicKey,
+        systemProgram: SystemProgram.programId,
+      },
+      signers: [tweet],
+    });
+
+    const tweetAccout = await program.account.tweet.fetch(tweet.publicKey);
+
+    assert.equal(tweetAccout.author.toBase58(), program.provider.wallet.publicKey.toBase58());
+    assert.equal(tweetAccout.topic, "");
+    assert.equal(tweetAccout.content, "hi");
+    assert.ok(tweetAccout.timestamp);
+  });
+
   it("will send a new tweet from a different author", async () => {
     const otherTopic = "microservices";
     const otherContent = "I love Kubernetes!";
@@ -68,5 +90,49 @@ describe("soltwitter", () => {
     assert.equal(tweetAccount.topic, otherTopic);
     assert.equal(tweetAccount.content, otherContent);
     assert.ok(tweetAccount.timestamp);
+  });
+
+  it("will not provide a topic with more than 50 characters", async () => {
+    try {
+      const newTopic = "x".repeat(51);
+      const newContent = "Hmmm...right content?";
+      const tweet = Keypair.generate();
+      await program.rpc.sendTweet(newTopic, newContent, {
+        accounts: {
+          tweet: tweet.publicKey,
+          author: program.provider.wallet.publicKey,
+          systemProgram: SystemProgram.programId,
+        },
+        signers: [tweet],
+      });
+    } catch (error) {
+      // Check if the error is the same from the one we declared in lib.rs
+      assert.equal(error.msg, TOPIC_ERROR);
+      return;
+    }
+    // Finish the test with error explanation
+    assert.fail("The instruction should have failed with a 51-characters topic.");
+  });
+
+  it("will not provide a content with more than 280 characters", async () => {
+    try {
+      const newTopic = "NEW TOPIC";
+      const newContent = "x".repeat(281);
+      const tweet = Keypair.generate();
+      await program.rpc.sendTweet(newTopic, newContent, {
+        accounts: {
+          tweet: tweet.publicKey,
+          author: program.provider.wallet.publicKey,
+          systemProgram: SystemProgram.programId,
+        },
+        signers: [tweet],
+      });
+    } catch (error) {
+      // Check if the error is the same from the one we declared in lib.rs
+      assert.equal(error.msg, CONTENT_ERROR);
+      return;
+    }
+    // Finish the test with error explanation
+    assert.fail("The instruction should have failed with a 281-characters topic.");
   });
 });
