@@ -36,6 +36,7 @@ pub enum TweetError {
     ContentTooLong,
 }
 
+// Instructions need to derive `Accounts` trait.
 #[derive(Accounts)]
 pub struct SendTweet<'info> {
     #[account(init, payer = author, space = Tweet::LEN)]
