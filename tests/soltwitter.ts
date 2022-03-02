@@ -2,6 +2,8 @@ import * as anchor from "@project-serum/anchor";
 import { Program } from "@project-serum/anchor";
 import { Soltwitter } from "../target/types/soltwitter";
 import * as assert from "assert";
+import { bytes } from "@project-serum/anchor/dist/cjs/utils";
+import { bs58 } from "@project-serum/anchor/dist/cjs/utils/bytes";
 
 const {
   web3: { SystemProgram, Keypair },
@@ -134,5 +136,44 @@ describe("soltwitter", () => {
     }
     // Finish the test with error explanation
     assert.fail("The instruction should have failed with a 281-characters topic.");
+  });
+
+  it("will fetch all tweets", async () => {
+    const tweetAccount = await program.account.tweet.all(); // this will get all the tweet accounts
+    assert.equal(tweetAccount.length, 3); // length should be three, since we have succeeded only 3 transactions
+  });
+
+  it("will filter tweets by author", async () => {
+    const authorPublicKey = program.provider.wallet.publicKey;
+    const tweetAccounts = await program.account.tweet.all([
+      {
+        // memory compare will do memory-level comparison between input and data on given position(offset)
+        memcmp: {
+          // the starting byte address
+          offset: 8, // our author info starts right after discriminator, which takes 8bytes
+          bytes: authorPublicKey.toBase58(),
+        },
+      },
+    ]);
+    assert.equal(tweetAccounts.length, 2); // because one of the 3 succeeded txs was from other author
+    assert.ok(tweetAccounts.every((tweetAccount) => tweetAccount.account.author.toBase58() === authorPublicKey.toBase58()));
+  });
+
+  it("will filter tweets by topic", async () => {
+    const topicToBeFiltered = "microservices";
+    const tweetAccounts = await program.account.tweet.all([
+      {
+        memcmp: {
+          offset:
+            8 + // discriminator
+            32 + // author pub key
+            8 + // Timestamp
+            4, // Topic string prefix
+          bytes: bs58.encode(Buffer.from(topicToBeFiltered)),
+        },
+      },
+    ]);
+    assert.equal(tweetAccounts.length, 1);
+    assert.ok(tweetAccounts.every((tweetAccount) => tweetAccount.account.topic === topicToBeFiltered));
   });
 });
