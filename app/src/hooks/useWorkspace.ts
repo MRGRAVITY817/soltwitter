@@ -3,7 +3,7 @@ import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { ConfirmOptions, Connection, PublicKey } from "@solana/web3.js";
 import { ENDPOINT } from "@utils/constants";
 import { useMemo } from "react";
-import idl from "../../soltwitter.json";
+import idl from "@idl/soltwitter.json";
 
 export const IDL = idl as Idl;
 
