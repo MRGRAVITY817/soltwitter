@@ -1,13 +1,17 @@
 [features]
 seeds = false
 [programs.localnet]
-soltwitter = "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"
+soltwitter = "H3tP4URvzTw9iow9aPynthyzSwGGoZLbXt34LVbhDE66"
+[programs.devnet]
+soltwitter = "H3tP4URvzTw9iow9aPynthyzSwGGoZLbXt34LVbhDE66"
+[programs.mainnet]
+soltwitter = "H3tP4URvzTw9iow9aPynthyzSwGGoZLbXt34LVbhDE66"
 
 [registry]
 url = "https://anchor.projectserum.com"
 
 [provider]
-cluster = "localnet"
+cluster = "devnet"
 wallet = "/Users/tripboi/.config/solana/id.json"
 
 [scripts]

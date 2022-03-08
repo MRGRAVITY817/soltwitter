@@ -2,7 +2,6 @@ import * as anchor from "@project-serum/anchor";
 import { Program } from "@project-serum/anchor";
 import { Soltwitter } from "../target/types/soltwitter";
 import * as assert from "assert";
-import { bytes } from "@project-serum/anchor/dist/cjs/utils";
 import { bs58 } from "@project-serum/anchor/dist/cjs/utils/bytes";
 
 const {

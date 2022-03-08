@@ -1,3 +1,4 @@
+import { RightSideSection } from "@components/RightSideSection";
 import { SideNav } from "@components/SideNav";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -31,10 +32,17 @@ export const MainLayout: React.FC<Props> = ({
         <meta property="og:title" content={title} />
         <meta property="og:image" content={image} />
       </Head>
-      <div className="px-96">
-        <div className="flex">
-          <SideNav />
-          <main className="w-full">{children}</main>
+      <div className="px-auto">
+        <div className="lg:px-32 md:px-24 px-8">
+          <div className="w-full grid grid-cols-4 divide-x-2">
+            <div className="col-span-1">
+              <SideNav />
+            </div>
+            <main className="col-span-2">{children}</main>
+            <div className="col-span-1">
+              <RightSideSection />
+            </div>
+          </div>
         </div>
       </div>
     </div>

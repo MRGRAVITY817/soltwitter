@@ -15,7 +15,7 @@ import { navState } from "src/states/navState";
 
 export const SideNav = () => {
   return (
-    <nav className="h-screen w-80 border-r-2 pt-8 px-8">
+    <nav className="h-screen xl:w-80 md:w-32 w-16 pt-8 lg:px-8 px-2">
       <div className="relative h-20">
         <Image
           src="/logo.png"
@@ -61,11 +61,11 @@ const NavItem: React.FC<{ title: string; href: string; icon: ReactNode }> = (
           currentNav === props.href
             ? "bg-indigo-100 opacity-100 text-indigo-700"
             : "bg-transparent opacity-50",
-          "flex items-center justify-start gap-6 px-4 py-2 hover:text-indigo-700 hover:opacity-100 transition-all rounded-lg"
+          "flex items-center xl:justify-start justify-center gap-6 px-4 py-2 hover:text-indigo-700 hover:opacity-100 transition-all rounded-lg"
         )}
       >
         {props.icon}
-        <p className="text-xl font-medium">{props.title}</p>
+        <p className="text-xl font-medium xl:flex hidden">{props.title}</p>
       </a>
     </Link>
   );

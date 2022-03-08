@@ -2,15 +2,20 @@ import type { NextPage } from "next";
 import { MainLayout } from "@layouts/Main.Layout";
 import { SectionContainer } from "@components/SectionContainer";
 import { TweetForm } from "@components/TweetForm";
+import { useState } from "react";
+import { useWorkspace } from "@hooks/useWorkspace";
+import { Tweet } from "@models/Tweet";
+import { TweetList } from "@components/TweetList";
+
+const meta = {
+  title: "Home",
+  description:
+    "Welcome to Soltwitter - Decentralized Twitter based on Solana Blockchain!",
+  image: "",
+  type: "web",
+};
 
 const Home: NextPage = () => {
-  const meta = {
-    title: "Home",
-    description:
-      "Welcome to Soltwitter - Decentralized Twitter based on Solana Blockchain!",
-    image: "",
-    type: "web",
-  };
   return (
     <>
       <MainLayout {...meta}>
@@ -21,6 +26,7 @@ const Home: NextPage = () => {
           <SectionContainer id="tweet-form-section">
             <TweetForm />
           </SectionContainer>
+          <TweetList />
         </div>
       </MainLayout>
     </>
