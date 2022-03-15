@@ -27,7 +27,7 @@ pub mod soltwitter {
         Ok(())
     }
 
-    pub fn update_tweet(ctx: Context<SendTweet>, topic: String, content: String) -> Result<()> {
+    pub fn update_tweet(ctx: Context<UpdateTweet>, topic: String, content: String) -> Result<()> {
         let tweet: &mut Account<Tweet> = &mut ctx.accounts.tweet;
         if topic.chars().count() > 50 {
             return Err(TweetError::TopicTooLong.into());

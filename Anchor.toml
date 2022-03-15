@@ -16,4 +16,4 @@ wallet = "/Users/tripboi/.config/solana/id.json"
 
 [scripts]
 copy-idl = "mkdir -p app/src/idl && cp target/idl/soltwitter.json app/src/idl/soltwitter.json"
-test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+test = "yarn ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
