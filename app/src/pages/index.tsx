@@ -11,7 +11,6 @@ const meta = {
   title: "Home",
   description:
     "Welcome to Soltwitter - Decentralized Twitter based on Solana Blockchain!",
-  image: "",
   type: "web",
 };
 

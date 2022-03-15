@@ -8,7 +8,6 @@ const Profile = () => {
   const meta = {
     title: "Profile",
     description: "Profile - Soltwitter",
-    image: "",
     type: "web",
   };
   return (
@@ -17,15 +16,14 @@ const Profile = () => {
         <SectionContainer>
           <h1>Profile</h1>
         </SectionContainer>
+        <div className="bg-gray-50 py-4 px-8 ">
+          <h3 className="mb-2">Your Address</h3>
+          <p className="text-gray-500 hover:text-indigo-700">
+            {wallet?.publicKey.toBase58()}
+          </p>
+        </div>
         <SectionContainer>
-          <div className="">
-            <p className="border-b py-4 px-8 bg-gray-50">
-              {wallet?.publicKey.toBase58()}
-            </p>
-            <div>
-              <TweetForm />
-            </div>
-          </div>
+          <TweetForm />
         </SectionContainer>
       </div>
     </MainLayout>

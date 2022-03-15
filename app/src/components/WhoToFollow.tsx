@@ -8,14 +8,14 @@ interface FollowItemParams {
 export const WhoToFollow = () => {
   const recommendations: FollowItemParams[] = [
     {
-      author: "Apollo",
-      id: "apollographql",
-      img: "/logo.png",
+      author: "Matilda",
+      id: "matilda_russell",
+      img: "/girl.jpeg",
     },
     {
-      author: "Dan",
-      id: "dan_abramov",
-      img: "/logo.png",
+      author: "Daniel",
+      id: "dan_porters",
+      img: "/boy.jpeg",
     },
   ];
   return (
@@ -43,6 +43,7 @@ const FollowItem: React.FC<FollowItemParams> = (item) => {
           height={50}
           width={50}
           className="bg-indigo-700 rounded-full"
+          objectFit="cover"
         />
         <div>
           <h3>{item.author}</h3>

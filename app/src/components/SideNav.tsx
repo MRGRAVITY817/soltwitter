@@ -8,23 +8,31 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { classNames } from "@utils/functions";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { ReactNode } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { navState } from "src/states/navState";
 
 export const SideNav = () => {
+  const setNav = useSetRecoilState(navState);
   return (
     <nav className="h-screen xl:w-80 md:w-32 w-16 pt-8 lg:px-8 px-2">
-      <div className="relative h-20">
-        <Image
-          src="/logo.png"
-          alt="soltwitter log"
-          layout="fill"
-          objectFit="contain"
-        />
-      </div>
-      <div className="grid grid-flow-row gap-y-4 mt-8">
+      <Link href="/">
+        <a
+          onClick={() => setNav("/")}
+          className="relative flex justify-center h-32"
+        >
+          <Image
+            src="/logo.jpg"
+            alt="soltwitter log"
+            height={100}
+            width={100}
+            objectFit="contain"
+            quality={100}
+            className="hover:rotate-45 transition-transform"
+          />
+        </a>
+      </Link>
+      <div className="grid grid-flow-row gap-y-4 mt-4">
         <NavItem title="Home" href="/" icon={<HomeIcon className="w-6" />} />
         <NavItem
           title="Topics"

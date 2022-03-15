@@ -1,27 +1,23 @@
 import { RightSideSection } from "@components/RightSideSection";
 import { SideNav } from "@components/SideNav";
 import Head from "next/head";
-import { useRouter } from "next/router";
 
 export interface Props {
   title: string;
   description: string;
-  image: string;
   type: string;
 }
 
 export const MainLayout: React.FC<Props> = ({
   title,
   description,
-  image,
   type,
   children,
 }) => {
-  const router = useRouter();
   return (
     <div>
       <Head>
-        <title>{title}</title>
+        <title>{title} - Soltwitter</title>
         <meta name="robot" content="follow, index" />
         <meta content={description} name="description" />
         <meta property="og:url" content={``} />
@@ -30,7 +26,7 @@ export const MainLayout: React.FC<Props> = ({
         <meta property="og:site_name" content={`Soltwitter`} />
         <meta property="og:description" content={description} />
         <meta property="og:title" content={title} />
-        <meta property="og:image" content={image} />
+        <meta property="og:image" content={`/banner.png`} />
       </Head>
       <div className="px-auto">
         <div className="lg:px-32 md:px-24 px-8">

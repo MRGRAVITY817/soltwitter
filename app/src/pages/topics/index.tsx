@@ -1,3 +1,4 @@
+import { SectionContainer } from "@components/SectionContainer";
 import { MainLayout } from "@layouts/Main.Layout";
 
 const Topics = () => {
@@ -9,7 +10,9 @@ const Topics = () => {
   };
   return (
     <MainLayout {...meta}>
-      <h1>Topics</h1>
+      <SectionContainer>
+        <h1>Topics</h1>
+      </SectionContainer>
     </MainLayout>
   );
 };
