@@ -26,6 +26,21 @@ pub mod soltwitter {
 
         Ok(())
     }
+
+    pub fn update_tweet(ctx: Context<SendTweet>, topic: String, content: String) -> Result<()> {
+        let tweet: &mut Account<Tweet> = &mut ctx.accounts.tweet;
+        if topic.chars().count() > 50 {
+            return Err(TweetError::TopicTooLong.into());
+        }
+        if content.chars().count() > 280 {
+            return Err(TweetError::ContentTooLong.into());
+        }
+
+        tweet.topic = topic;
+        tweet.content = content;
+
+        Ok(())
+    }
 }
 
 #[error_code]
@@ -43,7 +58,14 @@ pub struct SendTweet<'info> {
     pub tweet: Account<'info, Tweet>,
     #[account(mut)] // This is set to `mut` since we will change `author`'s lamport balance.
     pub author: Signer<'info>, // we have to know who is sending the tweet
-    pub system_program: Program<'info, System>, // we should provide system program that'll create `Tweet` account
+    pub system_program: Program<'info, System>, // we should provide system program that'll create `Tweet` account, also to use Clock.
+}
+
+#[derive(Accounts)]
+pub struct UpdateTweet<'info> {
+    #[account(mut, has_one = author)]
+    pub tweet: Account<'info, Tweet>,
+    pub author: Signer<'info>,
 }
 
 #[account]
