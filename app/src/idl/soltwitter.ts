@@ -56,6 +56,22 @@ export type Soltwitter = {
           "type": "string"
         }
       ]
+    },
+    {
+      "name": "deleteTweet",
+      "accounts": [
+        {
+          "name": "tweet",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "author",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": []
     }
   ],
   "accounts": [
@@ -156,6 +172,22 @@ export const IDL: Soltwitter = {
           "type": "string"
         }
       ]
+    },
+    {
+      "name": "deleteTweet",
+      "accounts": [
+        {
+          "name": "tweet",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "author",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": []
     }
   ],
   "accounts": [

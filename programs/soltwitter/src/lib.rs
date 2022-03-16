@@ -41,6 +41,10 @@ pub mod soltwitter {
 
         Ok(())
     }
+
+    pub fn delete_tweet(_ctx: Context<DeleteTweet>) -> Result<()> {
+        Ok(())
+    }
 }
 
 #[error_code]
@@ -63,7 +67,18 @@ pub struct SendTweet<'info> {
 
 #[derive(Accounts)]
 pub struct UpdateTweet<'info> {
+    // tweet has to be mut because we will modify the data inside it
+    // and it has only one account `author` that can modify it
     #[account(mut, has_one = author)]
+    pub tweet: Account<'info, Tweet>,
+    pub author: Signer<'info>,
+}
+
+#[derive(Accounts)]
+pub struct DeleteTweet<'info> {
+    // tweet has to be `mut` because we will modify-delete the data inside it
+    // then we will `close` the account, sending remaining lamports to author
+    #[account(mut, has_one = author, close = author)]
     pub tweet: Account<'info, Tweet>,
     pub author: Signer<'info>,
 }
