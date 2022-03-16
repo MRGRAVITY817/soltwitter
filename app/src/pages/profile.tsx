@@ -1,5 +1,6 @@
 import { SectionContainer } from "@components/SectionContainer";
 import { TweetForm } from "@components/TweetForm";
+import { TweetList } from "@components/TweetList";
 import { useWorkspace } from "@hooks/useWorkspace";
 import { MainLayout } from "@layouts/Main.Layout";
 
@@ -25,6 +26,7 @@ const Profile = () => {
         <SectionContainer>
           <TweetForm />
         </SectionContainer>
+        <TweetList isProfile />
       </div>
     </MainLayout>
   );

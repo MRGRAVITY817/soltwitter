@@ -31,6 +31,31 @@ export type Soltwitter = {
           "type": "string"
         }
       ]
+    },
+    {
+      "name": "updateTweet",
+      "accounts": [
+        {
+          "name": "tweet",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "author",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "topic",
+          "type": "string"
+        },
+        {
+          "name": "content",
+          "type": "string"
+        }
+      ]
     }
   ],
   "accounts": [
@@ -94,6 +119,31 @@ export const IDL: Soltwitter = {
           "name": "systemProgram",
           "isMut": false,
           "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "topic",
+          "type": "string"
+        },
+        {
+          "name": "content",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "updateTweet",
+      "accounts": [
+        {
+          "name": "tweet",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "author",
+          "isMut": false,
+          "isSigner": true
         }
       ],
       "args": [

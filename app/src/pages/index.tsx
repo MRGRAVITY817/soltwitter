@@ -2,9 +2,6 @@ import type { NextPage } from "next";
 import { MainLayout } from "@layouts/Main.Layout";
 import { SectionContainer } from "@components/SectionContainer";
 import { TweetForm } from "@components/TweetForm";
-import { useState } from "react";
-import { useWorkspace } from "@hooks/useWorkspace";
-import { Tweet } from "@models/Tweet";
 import { TweetList } from "@components/TweetList";
 
 const meta = {

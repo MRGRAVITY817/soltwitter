@@ -3,37 +3,21 @@ import { useState } from "react";
 import { HashtagIcon } from "@heroicons/react/solid";
 import { classNames } from "@utils/functions";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { programID, useWorkspace } from "@hooks/useWorkspace";
-import { web3 } from "@project-serum/anchor";
-import { Tweet } from "@models/Tweet";
+import { useTweet } from "@hooks/useTweet";
+import { RoundedButton } from "./RoundedButton";
 
 export const TweetForm = () => {
   const [content, setContent] = useState<string>("");
   const [topic, setTopic] = useState<string>("");
   const { connected } = useWallet();
-  const { wallet, program } = useWorkspace();
+  const { sendTweet } = useTweet();
 
-  const sendTweet = async (topic: string, content: string) => {
-    // new keypair for tweet account
-    console.log(programID.toBase58());
-    const tweet = web3.Keypair.generate();
-    try {
-      // @ts-expect-error
-      await program.rpc.sendTweet(topic, content, {
-        accounts: {
-          author: wallet?.publicKey,
-          tweet: tweet.publicKey,
-          systemProgram: web3.SystemProgram.programId,
-        },
-        signers: [tweet],
-      });
-      const tweetAccount = await program.account.tweet.fetch(tweet.publicKey);
-      setContent("");
-      setTopic("");
-      return new Tweet(tweet.publicKey, tweetAccount);
-    } catch (error) {
-      console.log(`Send Tweet Error: ${error}`);
-      return null;
+  const sendTweetAndInit = async (newTopic: string, newContent: string) => {
+    await sendTweet(newTopic, newContent);
+    setTopic("");
+    setContent("");
+    if (typeof window !== "undefined") {
+      window.location.reload();
     }
   };
 
@@ -80,13 +64,12 @@ export const TweetForm = () => {
               >
                 {MAX_TWEET_LENGTH - content.length} left
               </p>
-              <button
+              <RoundedButton
                 type="button"
-                onClick={() => sendTweet(topic, content)}
-                className="py-2 px-4 rounded-full bg-indigo-500 text-white hover:bg-indigo-600 transition-colors font-medium"
+                onClick={() => sendTweetAndInit(topic, content)}
               >
                 Tweet
-              </button>
+              </RoundedButton>
             </div>
           </div>
         </form>

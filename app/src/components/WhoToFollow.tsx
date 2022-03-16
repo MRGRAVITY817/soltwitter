@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { RoundedButton } from "./RoundedButton";
 
 interface FollowItemParams {
   author: string;
@@ -50,9 +51,7 @@ const FollowItem: React.FC<FollowItemParams> = (item) => {
           <p className="text-gray-500">@{item.id}</p>
         </div>
       </div>
-      <button className="bg-indigo-500 hover:bg-indigo-600 transition-colors py-2 px-4 rounded-full text-white">
-        Follow
-      </button>
+      <RoundedButton>Follow</RoundedButton>
     </div>
   );
 };
