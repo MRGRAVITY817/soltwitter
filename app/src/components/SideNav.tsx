@@ -28,7 +28,6 @@ export const SideNav = () => {
             width={100}
             objectFit="contain"
             quality={100}
-            className="hover:rotate-45 transition-transform"
           />
         </a>
       </Link>
