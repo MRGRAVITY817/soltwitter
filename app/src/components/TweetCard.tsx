@@ -36,7 +36,7 @@ export const TweetCard: React.FC<{ tweet: Tweet }> = ({ tweet }) => {
   };
 
   return (
-    <div className="py-6 px-8">
+    <div className="lg:py-6 lg:px-8 px-2 py-4">
       <div className="flex items-center justify-start gap-2 mb-1">
         <h3>{tweet.author_display}</h3>
         <p className="text-gray-500">•</p>
@@ -71,8 +71,8 @@ export const TweetCard: React.FC<{ tweet: Tweet }> = ({ tweet }) => {
             value={content}
             className="resize-none outline-none w-full text-md p-4 bg-gray-100 rounded-xl my-4"
           />
-          <div className="flex justify-between items-center">
-            <div className="bg-gray-100 rounded-full py-2 px-4 gap-4 flex items-center justify-start">
+          <div className="flex lg:flex-row flex-col lg:justify-between lg:items-center gap-4">
+            <div className="bg-gray-100 rounded-full lg:py-2 lg:px-4 py-1 px-2 gap-4 flex items-center justify-start">
               <HashtagIcon className="w-6 h-6 text-gray-500" />
               <input
                 type="text"

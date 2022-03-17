@@ -1,3 +1,4 @@
+import { PageHeaderContainer } from "@components/PageHeaderContainer";
 import { SectionContainer } from "@components/SectionContainer";
 import { TweetForm } from "@components/TweetForm";
 import { TweetList } from "@components/TweetList";
@@ -14,12 +15,12 @@ const Profile = () => {
   return (
     <MainLayout {...meta}>
       <div className="divide-y-2">
-        <SectionContainer>
+        <PageHeaderContainer>
           <h1>Profile</h1>
-        </SectionContainer>
-        <div className="bg-gray-50 py-4 px-8 ">
+        </PageHeaderContainer>
+        <div className="bg-gray-50 py-4 px-8 lg:block hidden">
           <h3 className="mb-2">Your Address</h3>
-          <p className="text-gray-500 hover:text-indigo-700">
+          <p className="text-gray-500 hover:text-indigo-500 overflow-auto">
             {wallet?.publicKey.toBase58()}
           </p>
         </div>

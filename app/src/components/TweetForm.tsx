@@ -36,7 +36,7 @@ export const TweetForm = () => {
             value={content}
             className="resize-none outline-none w-full text-lg p-2"
           />
-          <div className="flex justify-between items-center">
+          <div className="flex lg:flex-row lg:justify-between lg:items-center lg:gap-0 flex-col items-start gap-4">
             <div className="bg-gray-100 rounded-full py-2 px-4 gap-4 flex items-center justify-start">
               <HashtagIcon className="w-6 h-6 text-gray-500" />
               <input
@@ -48,7 +48,7 @@ export const TweetForm = () => {
                 className="bg-transparent outline-none"
               />
             </div>
-            <div className="flex items-center justify-end gap-6">
+            <div className="flex items-center justify-end w-full gap-6">
               <p
                 className={classNames(
                   "text-lg",

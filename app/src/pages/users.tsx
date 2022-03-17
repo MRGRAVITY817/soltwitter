@@ -1,3 +1,4 @@
+import { PageHeaderContainer } from "@components/PageHeaderContainer";
 import { SectionContainer } from "@components/SectionContainer";
 import { MainLayout } from "@layouts/Main.Layout";
 
@@ -9,9 +10,9 @@ const Users = () => {
   };
   return (
     <MainLayout {...meta}>
-      <SectionContainer>
+      <PageHeaderContainer>
         <h1>Users</h1>
-      </SectionContainer>
+      </PageHeaderContainer>
     </MainLayout>
   );
 };

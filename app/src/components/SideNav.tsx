@@ -15,18 +15,18 @@ import { navState } from "src/states/navState";
 export const SideNav = () => {
   const setNav = useSetRecoilState(navState);
   return (
-    <nav className="h-screen xl:w-80 md:w-32 w-16 pt-8 lg:px-8 px-2">
+    <nav className="h-screen lg:pt-8 lg:px-8 px-2">
       <Link href="/">
         <a
           onClick={() => setNav("/")}
-          className="relative flex justify-center h-32"
+          className="relative flex justify-center items-center h-32"
         >
           <Image
             src="/logo.jpg"
             alt="soltwitter log"
-            height={100}
-            width={100}
-            objectFit="contain"
+            height="100px"
+            width="100px"
+            objectFit="cover"
             quality={100}
           />
         </a>
@@ -49,7 +49,10 @@ export const SideNav = () => {
           icon={<UserIcon className="w-6" />}
         />
       </div>
-      <div className="mt-8">
+      <div className="xl:block xl:mt-8 hidden">
+        <WalletMultiButton />
+      </div>
+      <div className="xl:hidden fixed bottom-12 right-12">
         <WalletMultiButton />
       </div>
     </nav>
@@ -68,7 +71,7 @@ const NavItem: React.FC<{ title: string; href: string; icon: ReactNode }> = (
           currentNav === props.href
             ? "bg-indigo-100 opacity-100 text-indigo-700"
             : "bg-transparent opacity-50",
-          "flex items-center xl:justify-start justify-center gap-6 px-4 py-2 hover:text-indigo-700 hover:opacity-100 transition-all rounded-lg"
+          "flex items-center xl:justify-start justify-center gap-6 p-2 hover:text-indigo-700 hover:opacity-100 transition-all rounded-lg"
         )}
       >
         {props.icon}

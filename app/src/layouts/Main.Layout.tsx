@@ -1,3 +1,4 @@
+import { BottomNav } from "@components/BottomNav";
 import { RightSideSection } from "@components/RightSideSection";
 import { SideNav } from "@components/SideNav";
 import Head from "next/head";
@@ -29,14 +30,17 @@ export const MainLayout: React.FC<Props> = ({
         <meta property="og:image" content={`/banner.png`} />
       </Head>
       <div className="px-auto">
-        <div className="lg:px-32 md:px-24 px-8">
-          <div className="w-full grid grid-cols-4 divide-x-2">
-            <div className="col-span-1">
+        <div className="px-4">
+          <div className="flex flex-row gap-2 items-start justify-center">
+            <div className="md:block hidden">
               <SideNav />
             </div>
-            <main className="col-span-2">{children}</main>
-            <div className="col-span-1">
+            <div className="md:w-auto w-full">{children}</div>
+            <div className="lg:block hidden">
               <RightSideSection />
+            </div>
+            <div className="md:hidden fixed w-full">
+              <BottomNav />
             </div>
           </div>
         </div>
