@@ -35,7 +35,7 @@ export const MainLayout: React.FC<Props> = ({
             <div className="md:block hidden">
               <SideNav />
             </div>
-            <div className="md:w-auto w-full">{children}</div>
+            <div className="md:w-[600px] w-full">{children}</div>
             <div className="lg:block hidden">
               <RightSideSection />
             </div>

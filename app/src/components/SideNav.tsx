@@ -52,9 +52,6 @@ export const SideNav = () => {
       <div className="xl:block xl:mt-8 hidden">
         <WalletMultiButton />
       </div>
-      <div className="xl:hidden fixed bottom-12 right-12">
-        <WalletMultiButton />
-      </div>
     </nav>
   );
 };

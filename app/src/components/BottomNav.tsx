@@ -14,24 +14,29 @@ import { navState } from "src/states/navState";
 
 export const BottomNav = () => {
   return (
-    <nav className="w-full bg-white flex justify-around border-t-2 py-4 fixed bottom-0">
-      <NavItem title="Home" href="/" icon={<HomeIcon className="w-6" />} />
-      <NavItem
-        title="Topics"
-        href="/topics"
-        icon={<ChatIcon className="w-6" />}
-      />
-      <NavItem
-        title="Users"
-        href="/users"
-        icon={<UsersIcon className="w-6" />}
-      />
-      <NavItem
-        title="Profile"
-        href="/profile"
-        icon={<UserIcon className="w-6" />}
-      />
-    </nav>
+    <div>
+      <nav className="w-full bg-white flex justify-around border-t-2 py-4 fixed bottom-0">
+        <NavItem title="Home" href="/" icon={<HomeIcon className="w-6" />} />
+        <NavItem
+          title="Topics"
+          href="/topics"
+          icon={<ChatIcon className="w-6" />}
+        />
+        <NavItem
+          title="Users"
+          href="/users"
+          icon={<UsersIcon className="w-6" />}
+        />
+        <NavItem
+          title="Profile"
+          href="/profile"
+          icon={<UserIcon className="w-6" />}
+        />
+      </nav>
+      <div className="xl:hidden fixed bottom-24 left-4">
+        <WalletMultiButton />
+      </div>
+    </div>
   );
 };
 
